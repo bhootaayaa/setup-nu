@@ -35,6 +35,10 @@ jobs:
         NU_MODULE_DIRS: ${{ github.workspace }}/nu
         ACTIONS_STEP_DEBUG: true
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Set Module Dir
+      shell: bash
+      run: |
+        echo "NU_LIB_DIRS=${{ github.workspace }}/nu" >> $GITHUB_ENV
     - name: Show Nu Version
       run: print $'Nu version info:(char nl)'; print (version)
     - name: Use Your Nu Modules
