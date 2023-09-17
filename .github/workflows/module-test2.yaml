@@ -1,4 +1,4 @@
-name: Nu Module Test
+name: Nu Module Test 2
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - main
       - develop
       - release/*
+      - feature/module
     paths-ignore:
       - '**.md'
 
@@ -19,14 +20,14 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04, macos-latest, windows-latest]
-        ver: [0.85, 0.83.1, 0.82, '0.80', 0.79, 0.78, 0.77.1, 0.76, 0.75, 0.74, 0.73, 0.72.1, 0.71, '0.70', 0.69.1]
+        ver: [0.84]
 
     runs-on: ${{ matrix.os }}
     name: test (${{matrix.os}}, nu@${{matrix.ver}})
     steps:
     - uses: actions/checkout@v4.0.0
     - name: Setup nu@latest
-      uses: hustcer/setup-nu@develop
+      uses: hustcer/setup-nu@feature/module
       with:
         enable-plugins: true
         version: ${{matrix.ver}}
@@ -37,9 +38,5 @@ jobs:
       run: print $'Nu version info:(char nl)'; print (version)
     - name: Use Your Nu Modules
       run: |
+        $env.NU_DIR_LIB | flatten | print
         nu -c "use nu/module.nu *; print (get-env 'ABC-XYZ' 'DEFAULT-ABC-XYZ')"
-    - name: Use Your Nu Modules by Absolute Path
-      run: |
-        use ${{ github.workspace }}/nu/module.nu *
-        print 'Use module from: ${{ github.workspace }}/nu/module.nu'
-        print (get-env 'ABC-XYZ' 'DEFAULT-ABC-XYZ-ABSOLUTE-PATH')
