@@ -9,6 +9,8 @@ def-env setup-lib-dirs [] {
   print 'Current working dir: '
   print ($env.PWD)
   let module_dirs = ($env | get -i $LIB_ENV | default '' | str trim)
+  'module_dirs: ' | print
+  $module_dirs | print
   if ($module_dirs | is-empty) { return }
   let dirs = (
     $module_dirs

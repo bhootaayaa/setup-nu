@@ -32,6 +32,7 @@ jobs:
         enable-plugins: true
         version: ${{matrix.ver}}
       env:
+        NU_MODULE_DIRS: ${{ github.workspace }}/nu
         ACTIONS_STEP_DEBUG: true
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Show Nu Version
