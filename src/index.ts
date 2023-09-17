@@ -30,6 +30,8 @@ async function main() {
     core.addPath(tool.dir);
     core.info(`Successfully setup ${tool.name} v${tool.version}`);
 
+    shell.exec(`nu ./nu/prepare.nu`);
+
     if (enablePlugins) {
       console.log('Running ./nu/register-plugins.nu to register plugins...');
       shell.exec(`nu ./nu/register-plugins.nu ${tool.version}`);
