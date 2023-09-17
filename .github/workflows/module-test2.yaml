@@ -38,11 +38,13 @@ jobs:
     - name: Set Module Dir
       shell: bash
       run: |
+        echo "AB_XY=9988" >> $GITHUB_ENV
         echo "NU_LIB_DIRS=${{ github.workspace }}/nu" >> $GITHUB_ENV
     - name: Show Nu Version
       run: print $'Nu version info:(char nl)'; print (version)
     - name: Use Your Nu Modules
       run: |
+        $env.AB_XY | print
         $env.NU_LIB_DIRS | flatten | print
         use module.nu *
         print (get-env 'ABC-XYZ' 'DEFAULT-ABC-XYZ')
