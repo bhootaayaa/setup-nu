@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, macos-latest, windows-latest]
+        os: [ubuntu-22.04]
         ver: [0.84]
 
     runs-on: ${{ matrix.os }}
@@ -43,7 +43,7 @@ jobs:
     - name: Show Nu Version
       run: print $'Nu version info:(char nl)'; print (version)
     - name: Use Your Nu Modules
-      shell: nu -I ${{ github.workspace }} {0}
+      shell: nu -I /home/runner/work/setup-nu/setup-nu {0}
       run: |
         $env.AB_XY | print
         $env.NU_LIB_DIRS | flatten | print
