@@ -44,4 +44,5 @@ jobs:
     - name: Use Your Nu Modules
       run: |
         $env.NU_LIB_DIRS | flatten | print
-        nu -c "use nu/module.nu *; print (get-env 'ABC-XYZ' 'DEFAULT-ABC-XYZ')"
+        use module.nu *
+        print (get-env 'ABC-XYZ' 'DEFAULT-ABC-XYZ')
