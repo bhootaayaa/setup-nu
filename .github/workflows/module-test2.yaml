@@ -38,5 +38,5 @@ jobs:
       run: print $'Nu version info:(char nl)'; print (version)
     - name: Use Your Nu Modules
       run: |
-        $env.NU_DIR_LIB | flatten | print
+        $env.NU_LIB_DIRS | flatten | print
         nu -c "use nu/module.nu *; print (get-env 'ABC-XYZ' 'DEFAULT-ABC-XYZ')"
