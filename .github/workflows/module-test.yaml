@@ -67,8 +67,8 @@ jobs:
           print $env.NU_LIB_DIRS
         }
         setup-lib-dirs
-        use common.nu [get-env]
-        print (get-env 'ABC-XYZ' 'DEFAULT-ABC-XYZ')
+        # use common.nu [get-env]
+        # print (get-env 'ABC-XYZ' 'DEFAULT-ABC-XYZ')
     - name: Test NU_LIB_DIRS 2
       run: |
         mkdir ($nu.config-path | path dirname | path join 'scripts')
@@ -80,7 +80,7 @@ jobs:
       run: |
         use common.nu [get-env]
         print 'Available Nu Modules:'
-        print (ls ($env.NU_LIB_DIRS | get 0))
+        # print (ls ($env.NU_LIB_DIRS | get 0))
         print (get-env 'ABC-XYZ' 'DEFAULT-ABC-XYZ')
 
 
