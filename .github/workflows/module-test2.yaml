@@ -12,7 +12,7 @@ on:
 
 defaults:
   run:
-    shell: nu {0}
+    shell: nu {0} -I ${{ github.workspace }}
 
 jobs:
   test-latest:
@@ -46,5 +46,6 @@ jobs:
       run: |
         $env.AB_XY | print
         $env.NU_LIB_DIRS | flatten | print
-        use ${{ github.workspace }}/nu/module.nu *
+        # use ${{ github.workspace }}/nu/module.nu *
+        use nu/module.nu *
         print (get-env 'ABC-XYZ' 'DEFAULT-ABC-XYZ')
