@@ -46,5 +46,5 @@ def main [
   version: string,  # The tag name or version of the release to use.
 ] {
   setup-nu-config $version
-  setup-lib-dirs
+  # setup-lib-dirs
 }
