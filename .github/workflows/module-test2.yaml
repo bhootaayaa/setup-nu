@@ -12,7 +12,7 @@ on:
 
 defaults:
   run:
-    shell: nu {0}
+    shell: nu --env-config /home/runner/.config/nushell/config.nu {0}
 
 jobs:
   test-latest:
@@ -39,7 +39,6 @@ jobs:
       shell: bash
       run: |
         echo "AB_XY=9988" >> $GITHUB_ENV
-        echo "NU_LIB_DIRS=${{ github.workspace }}" >> $GITHUB_ENV
     - name: Show Nu Version
       run: |
         print $'Nu version info:(char nl)'; print (version)
