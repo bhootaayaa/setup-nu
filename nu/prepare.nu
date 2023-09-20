@@ -22,6 +22,9 @@ def-env setup-lib-dirs [] {
   print 'Current NU_LIB_DIRS: '
   print $libs
   bash -c $'echo "NU_LIB_DIRS=($libs)" >> $GITHUB_ENV'
+
+  open $nu.env-path | nu-highlight
+
   # open $nu.env-path
   #   | str replace -s 'let-env NU_LIB_DIRS = [' $'let-env NU_LIB_DIRS = [(char nl)($env.NU_LIB_DIRS | str join (char nl))'
   #   | save -f $nu.env-path
