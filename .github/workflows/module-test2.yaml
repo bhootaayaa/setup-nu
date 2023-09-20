@@ -42,8 +42,8 @@ jobs:
           Windows: 'C:/Users/runneradmin/AppData/Roaming/nushell',
           Darwin: '/Users/runner/Library/Application Support/nushell',
         }
-        print $nu
-        let libDir = LIB_DIR_MAP | get ((sys).host.name)
+        print $nu.default-config-dir
+        let libDir = $LIB_DIR_MAP | get ((sys).host.name)
         cp -r nu $'($libDir)/scripts'
         ls $'($libDir)/scripts'
     - name: Show Nu Version
