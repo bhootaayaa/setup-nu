@@ -46,7 +46,6 @@ jobs:
         $env.NU_LIB_DIRS | print
     - name: Use Your Nu Modules
       run: |
-        $env.AB_XY | print
         $env.NU_LIB_DIRS | print
         # use ${{ github.workspace }}/nu/module.nu *
         use module.nu *
