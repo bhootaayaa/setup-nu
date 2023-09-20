@@ -5,6 +5,16 @@ use common.nu [get-env]
 # Environment variable name for module directories, multiple directories should be separated by `;`
 const LIB_ENV = 'NU_MODULE_DIRS'
 
+def setup-nu-config [
+  version: string,  # The tag name or version of the release to use.
+] {
+  let config_path = ($nu.env-path | path dirname)
+  let config_prefix = $'https://github.com/nushell/nushell/blob/($version)/crates/nu-utils/src'
+  aria2c $'($config_prefix)/sample_config/default_env.nu' -o env.nu -d $config_path
+  aria2c $'($config_prefix)/sample_config/default_config.nu' -o config.nu -d $config_path
+  config reset --without-backup
+}
+
 def-env setup-lib-dirs [] {
   print 'Current working dir: '
   print ($env.PWD)
@@ -30,4 +40,9 @@ def-env setup-lib-dirs [] {
   #   | save -f $nu.env-path
 }
 
-setup-lib-dirs
+def main [
+  version: string,  # The tag name or version of the release to use.
+] {
+  setup-nu-config $version
+  setup-lib-dirs
+}
