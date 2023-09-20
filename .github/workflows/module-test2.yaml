@@ -38,6 +38,7 @@ jobs:
     - name: Set Module Dir
       shell: bash
       run: |
+        mkdir /home/runner/.config/nushell/scripts/nu
         cp -r nu /home/runner/.config/nushell/scripts/nu
         ls /home/runner/.config/nushell/scripts/
     - name: Show Nu Version
