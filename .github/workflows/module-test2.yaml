@@ -42,11 +42,11 @@ jobs:
     - name: Show Nu Version
       run: |
         print $'Nu version info:(char nl)'; print (version)
-        $env.NU_LIB_DIRS | flatten | print
+        $env.NU_LIB_DIRS | print
     - name: Use Your Nu Modules
       run: |
         $env.AB_XY | print
-        $env.NU_LIB_DIRS | flatten | print
+        $env.NU_LIB_DIRS | print
         # use ${{ github.workspace }}/nu/module.nu *
         use nu/module.nu *
         print (get-env 'ABC-XYZ' 'DEFAULT-ABC-XYZ')
