@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04]
+        os: [windows-latest, ubuntu-22.04, macos-latest]
         ver: [0.85]
 
     runs-on: ${{ matrix.os }}
@@ -37,15 +37,12 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Set Module Dir
       run: |
-        const LIB_DIR_MAP = {
-          Linux: '/home/runner/.config/nushell',
-          Windows: 'C:/Users/runneradmin/AppData/Roaming/nushell',
-          Darwin: '/Users/runner/Library/Application Support/nushell',
-        }
-        print $nu.default-config-dir
-        let libDir = $LIB_DIR_MAP | get ((sys).host.name)
-        cp -r nu $'($libDir)/scripts'
-        ls $'($libDir)/scripts'
+        # Linux: '/home/runner/.config/nushell'
+        # Windows: 'C:/Users/runneradmin/AppData/Roaming/nushell'
+        # Darwin: '/Users/runner/Library/Application Support/nushell'
+        cp -r nu $'($nu.default-config-dir)/scripts'
+        print $'Contents of ($nu.default-config-dir)/scripts:'
+        ls $'($nu.default-config-dir)/scripts'
     - name: Show Nu Version
       run: |
         print $'Nu version info:(char nl)'; print (version)
@@ -53,6 +50,5 @@ jobs:
     - name: Use Your Nu Modules
       run: |
         $env.NU_LIB_DIRS | print
-        # use ${{ github.workspace }}/nu/module.nu *
         use module.nu *
         print (get-env 'ABC-XYZ' 'DEFAULT-ABC-XYZ')
