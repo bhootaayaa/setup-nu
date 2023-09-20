@@ -38,7 +38,7 @@ jobs:
     - name: Set Module Dir
       shell: bash
       run: |
-        $'Copy modules to ($nu.default-config-dir)/scripts' | print
+        $'Copy modules to ($nu.config-path | path dirname)/scripts' | print
         cp -r nu /home/runner/.config/nushell/scripts
         ls /home/runner/.config/nushell/scripts
     - name: Show Nu Version
