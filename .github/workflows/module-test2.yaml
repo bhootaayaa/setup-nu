@@ -38,7 +38,8 @@ jobs:
     - name: Set Module Dir
       shell: bash
       run: |
-        echo "AB_XY=9988" >> $GITHUB_ENV
+        cp -r nu ($env.NU_LIB_DIRS | get 0)
+        ls ($env.NU_LIB_DIRS | get 0)
     - name: Show Nu Version
       run: |
         print $'Nu version info:(char nl)'; print (version)
