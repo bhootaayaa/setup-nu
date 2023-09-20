@@ -28,12 +28,12 @@ def-env setup-lib-dirs [] {
       | each {|p| ($p | str trim | path expand) }
       | filter {|p| ($p | path exists) }
   )
-  # let libs = ($env.NU_LIB_DIRS | append $dirs | str join ';')
-  echo [$'$env.NU_LIB_DIRS = ', '(', $'$env.NU_LIB_DIRS | append ($dirs)', ')'] | str join '' | save -a $nu.env-path
+  let libs = ($dirs | str join ';')
+  # echo [$'$env.NU_LIB_DIRS = ', '(', $'$env.NU_LIB_DIRS | append ($dirs)', ')'] | str join '' | save -a $nu.env-path
 
-  # print 'Current NU_LIB_DIRS: '
-  # print $libs
-  # bash -c $'echo "NU_LIB_DIRS=($libs)" >> $GITHUB_ENV'
+  print 'Current NU_LIB_DIRS: '
+  print $libs
+  bash -c $'echo "NU_LIB_DIRS=($libs)" >> $GITHUB_ENV'
 
   open $nu.env-path | nu-highlight
 
