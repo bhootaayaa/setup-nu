@@ -38,8 +38,7 @@ jobs:
     - name: Set Module Dir
       shell: bash
       run: |
-        mkdir /home/runner/.config/nushell/scripts/nu
-        cp -r nu /home/runner/.config/nushell/scripts/nu
+        cp -r nu/* /home/runner/.config/nushell/scripts
         ls /home/runner/.config/nushell/scripts/
     - name: Show Nu Version
       run: |
@@ -50,5 +49,5 @@ jobs:
         $env.AB_XY | print
         $env.NU_LIB_DIRS | print
         # use ${{ github.workspace }}/nu/module.nu *
-        use nu/module.nu *
+        use module.nu *
         print (get-env 'ABC-XYZ' 'DEFAULT-ABC-XYZ')
