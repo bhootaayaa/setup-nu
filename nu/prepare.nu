@@ -29,7 +29,7 @@ def-env setup-lib-dirs [] {
       | filter {|p| ($p | path exists) }
   )
   let libs = ($env.NU_LIB_DIRS | append $dirs | str join ';')
-  echo [$'$env.NU_LIB_DIRS = ', '(', $'$env.NU_LIB_DIRS | append ($dirs)', ')'] | save -a $nu.env-path
+  echo [$'$env.NU_LIB_DIRS = ', '(', $'$env.NU_LIB_DIRS | append ($dirs)', ')'] | str join '' | save -a $nu.env-path
 
   print 'Current NU_LIB_DIRS: '
   print $libs
