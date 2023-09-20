@@ -36,14 +36,16 @@ jobs:
         NU_MODULE_DIRS: ${{ github.workspace }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Set Module Dir
-      shell: bash
       run: |
-        # Ubuntu: /home/runner/.config/nushell
-        # macOS: /Users/runner/Library/Application Support/nushell
-        # Windows: C:/Users/runneradmin/AppData/Roaming/nushell
+        const LIB_DIR_MAP = {
+          Linux: '/home/runner/.config/nushell',
+          Windows: 'C:/Users/runneradmin/AppData/Roaming/nushell',
+          Darwin: '/Users/runner/Library/Application Support/nushell',
+        }
         print $nu
-        cp -r nu /home/runner/.config/nushell/scripts
-        ls /home/runner/.config/nushell/scripts
+        let libDir = LIB_DIR_MAP | get ((sys).host.name)
+        cp -r nu $'($libDir)/scripts'
+        ls $'($libDir)/scripts'
     - name: Show Nu Version
       run: |
         print $'Nu version info:(char nl)'; print (version)
