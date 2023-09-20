@@ -41,9 +41,10 @@ jobs:
         echo "AB_XY=9988" >> $GITHUB_ENV
         echo "NU_LIB_DIRS=${{ github.workspace }}" >> $GITHUB_ENV
     - name: Show Nu Version
-      run: print $'Nu version info:(char nl)'; print (version)
+      run: |
+        print $'Nu version info:(char nl)'; print (version)
+        $env.NU_LIB_DIRS | flatten | print
     - name: Use Your Nu Modules
-      shell: nu -I /home/runner/work/setup-nu/setup-nu {0}
       run: |
         $env.AB_XY | print
         $env.NU_LIB_DIRS | flatten | print
