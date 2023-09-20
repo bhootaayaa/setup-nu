@@ -41,6 +41,7 @@ jobs:
         # Ubuntu: /home/runner/.config/nushell
         # macOS: /Users/runner/Library/Application Support/nushell
         # Windows: C:/Users/runneradmin/AppData/Roaming/nushell
+        print $nu
         cp -r nu /home/runner/.config/nushell/scripts
         ls /home/runner/.config/nushell/scripts
     - name: Show Nu Version
