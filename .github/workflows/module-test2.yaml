@@ -35,20 +35,7 @@ jobs:
         ACTIONS_STEP_DEBUG: true
         NU_MODULE_DIRS: ${{ github.workspace }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Show Nu Version and NU_LIB_DIRS
-      run: |
-        print $'Nu version info:(char nl)'; print (version)
-        print 'NU_LIB_DIRS:'
-        $env.NU_LIB_DIRS | print
-    - name: Prepare Nu Modules
-      run: |
-        # Linux: '/home/runner/.config/nushell'
-        # Windows: 'C:/Users/runneradmin/AppData/Roaming/nushell'
-        # Darwin: '/Users/runner/Library/Application Support/nushell'
-        cp -r nu $'($nu.default-config-dir)/scripts'
-        print $'Contents of ($nu.default-config-dir)/scripts:'
-        ls $'($nu.default-config-dir)/scripts'
     - name: Use Your Nu Modules
       run: |
-        use module.nu *
+        use ./nu/module.nu *
         print (get-env 'ABC-XYZ' 'DEFAULT-ABC-XYZ')
