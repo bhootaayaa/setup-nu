@@ -35,8 +35,10 @@ const PLATFORM_FULL_MAP: Record<Platform, string[]> = {
 function getTargets(features: 'default' | 'full'): string[] {
   const { arch, platform } = process;
   const selector = `${platform}_${arch}`;
-  core.info( selector)
-  console.log("selector", selector)
+
+  core.info(`OS version ${selector}`);
+
+  console.log('selector', selector);
 
   if (features === 'default') {
     return PLATFORM_DEFAULT_MAP[selector as Platform];
@@ -105,8 +107,7 @@ interface Release {
  */
 function filterMatch(response: any, versionSpec: string | undefined, features: 'default' | 'full'): Release[] {
   const targets = getTargets(features);
-  core.info(targets)
-  console.log("targets", targets)
+  console.log('targets', targets);
   return response.data
     .map((rel: { assets: any[]; tag_name: string }) => {
       const asset = rel.assets.find((ass: { name: string | string[] }) =>
@@ -132,8 +133,8 @@ function filterMatch(response: any, versionSpec: string | undefined, features: '
  */
 function filterLatest(response: any, features: 'default' | 'full'): Release[] {
   const targets = getTargets(features);
-  core.info(targets)
-  console.log("targets", targets)
+
+  console.log('targets', targets);
   const versions = response.data.map((r: { tag_name: string }) => r.tag_name);
   const latest = semver.rsort(versions)[0];
   return response.data
@@ -159,7 +160,7 @@ function filterLatest(response: any, features: 'default' | 'full'): Release[] {
  */
 function filterLatestNightly(response: any, features: 'default' | 'full'): Release[] {
   const targets = getTargets(features);
-  core.info( targets)
+
   const publishedAt = response.data.map((r: { published_at: string }) => r.published_at);
   const sortedDates = publishedAt.sort((a: string, b: string) => new Date(b).getTime() - new Date(a).getTime());
   const latest = sortedDates[0];
