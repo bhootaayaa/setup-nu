@@ -35,6 +35,7 @@ const PLATFORM_FULL_MAP: Record<Platform, string[]> = {
 function getTargets(features: 'default' | 'full'): string[] {
   const { arch, platform } = process;
   const selector = `${platform}_${arch}`;
+  console.log("selector", selector)
 
   if (features === 'default') {
     return PLATFORM_DEFAULT_MAP[selector as Platform];
@@ -103,6 +104,7 @@ interface Release {
  */
 function filterMatch(response: any, versionSpec: string | undefined, features: 'default' | 'full'): Release[] {
   const targets = getTargets(features);
+  console.log("targets", targets)
   return response.data
     .map((rel: { assets: any[]; tag_name: string }) => {
       const asset = rel.assets.find((ass: { name: string | string[] }) =>
